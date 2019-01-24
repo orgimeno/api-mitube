@@ -281,4 +281,55 @@ class UserController extends Controller
 
         return $helpers->json($data);
     }
+
+
+    /**
+     * @param Request $request
+     */
+    public function channelAction(Request $request, $id = null){
+
+        $helpers = $this->get("app.helpers");
+
+        $em = $this->getDoctrine()->getManager();
+
+        if(!is_null($id)){
+
+            $user = $em->getRepository(User::class)->find($id);
+
+            $dql = "SELECT v from BackendBundle:Video v ORDER BY v.id DESC";
+
+            $query = $em->createQuery($dql);
+
+            $page = $request->query->getInt("page", 1);
+
+            $paginator = $this->get("knp_paginator");
+
+            $items_per_page = 6;
+
+            $pagination = $paginator->paginate($query, $page, $items_per_page);
+            $total_items_count = $pagination->getTotalItemCount();
+
+            $data = [
+                "status" => "success",
+                "total_items_count" => $total_items_count,
+                "page_actual" => $page,
+                "items_per_page" => $items_per_page,
+                "total_pages" => ceil($total_items_count / $items_per_page),
+                "data" => [
+                    'user' => $user,
+                    'videos' => $pagination
+                ]
+            ];
+
+        }else{
+
+            $data = [
+                "status" => "Error",
+                'code' => 400,
+                'msg' => "User not found"
+            ];
+        }
+
+        return $helpers->json($data);
+    }
 }
