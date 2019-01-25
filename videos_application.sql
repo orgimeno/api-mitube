@@ -22,6 +22,8 @@ SET time_zone = "+00:00";
 -- Base de datos: `videos_application`
 --
 
+CREATE SCHEMA `videos_application` DEFAULT CHARACTER SET utf8 ;
+
 -- --------------------------------------------------------
 
 --
