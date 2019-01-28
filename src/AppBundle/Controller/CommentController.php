@@ -14,6 +14,8 @@ class CommentController extends Controller
     /**
      * Create Comment
      *
+     * @param Request $request
+     * @return array
      * @throws \Exception
      */
     public function newAction(Request $request){
@@ -97,7 +99,9 @@ class CommentController extends Controller
     /**
      * Delete Comment
      *
-     * @throws \Exception
+     * @param Request $request
+     * @param null $id
+     * @return array
      */
     public function deleteAction(Request $request, $id = null){
         $helpers = $this->get('app.helpers');
@@ -123,6 +127,12 @@ class CommentController extends Controller
                     'code' => 200,
                     'msg' => "Borrado correctamente"
                 ];
+            }else{
+                $data = [
+                    'status' => "error",
+                    'code' => 403,
+                    'msg' => "No hga podido acceder al contenido"
+                ];
             }
         }else{
             $data = [
@@ -139,7 +149,7 @@ class CommentController extends Controller
      * List Comments
      *
      * @param null $id
-     * @return
+     * @return array
      */
     public function listAction($id = null){
         $helpers = $this->get('app.helpers');
