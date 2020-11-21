@@ -151,6 +151,7 @@ class UserController extends Controller
                     && $name != null
                     && $surname != null){
 
+                    $user->setCreateAt($createAt);
                     $user->setRole($role);
                     $user->setEmail($email);
                     $user->setName($name);
