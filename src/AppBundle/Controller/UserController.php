@@ -151,7 +151,6 @@ class UserController extends Controller
                     && $name != null
                     && $surname != null){
 
-                    $user->setImage($image);
                     $user->setRole($role);
                     $user->setEmail($email);
                     $user->setName($name);
@@ -239,8 +238,8 @@ class UserController extends Controller
             if(!empty($file) && $file != null){
                 $ext = $file->guessExtension();
 
-                if($ext == 'jpg' || $ext == 'gif'
-                || $ext = 'jpeg' || $ext = 'png'){
+                if($ext === 'jpg' || $ext === 'gif'
+                || $ext === 'jpeg' || $ext === 'png'){
                     $file_name = time().".".$ext;
                     $file->move("uploads/users", $file_name);
 
