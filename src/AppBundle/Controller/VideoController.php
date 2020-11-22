@@ -171,8 +171,10 @@ class VideoController extends Controller
         return $helpers->json($data);
     }
 
-    /*
-     *
+    /**
+     * @param Request $request
+     * @param null $id
+     * @return mixed
      */
     public function uploadAction(Request $request, $id = null){
 
@@ -180,7 +182,7 @@ class VideoController extends Controller
         $hash = $request->get('authorization', null);
         $authCheck = $helpers->authCheck($hash);
 
-        if($authCheck) {
+        if($authCheck){
             $em = $this->getDoctrine()->getManager();
             $identity = $helpers->authCheck($hash, true);
 
@@ -207,7 +209,8 @@ class VideoController extends Controller
                             $data = [
                                 'status' => "success",
                                 'code' => 200,
-                                'msg' => "Video image uploaded"
+                                'msg' => "Video image uploaded",
+                                'file_name' => $file_name
                             ];
                         }else{
 
