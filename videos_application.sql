@@ -26,6 +26,8 @@ CREATE SCHEMA `videos_application` DEFAULT CHARACTER SET utf8 ;
 
 -- --------------------------------------------------------
 
+USE `videos_application`;
+
 --
 -- Estructura de tabla para la tabla `comments`
 --
